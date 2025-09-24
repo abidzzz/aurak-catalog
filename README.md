@@ -44,6 +44,14 @@ npm install
 # Start the development server
 npm start
 ```
+---
+## TODO:
+- Find a better way to store courses instead of `courses.js`
+- Fix course selection behavior: allow clicking on course name to select/unselect even with drag-and-drop active
+- Show prerequisites for each course
+- Add more courses
+- Implement mobile view
+- Prevent course selection conflict when drag-and-drop is enabled
 
 ---
 ## Contributing
