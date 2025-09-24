@@ -1,6 +1,6 @@
 # AURAK Catalog 
 
-**Live Demo:** [https://https://abidzzz.github.io/](https://https://abidzzz.github.io/)  
+**Live Demo:** [https://abidzzz.github.io/aurak-catalog/](https://abidzzz.github.io/aurak-catalog/)  
 
 A personal project built with **React.js** to help AURAK students easily manage and track their course progress.  
 Select your **major**, then **drag & drop** courses and **check/uncheck** the ones you’ve completed.
