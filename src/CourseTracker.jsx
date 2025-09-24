@@ -6,7 +6,7 @@ import { majorCourseData } from './courses.js';
 
 function CourseTracker({ majorKey, onBack }) {
 	const [catalog, setCatalog] = useState([]);
-	
+
 	// Save catalog to localStorage whenever it changes
 	useEffect(() => {
 		if (catalog.length > 0) {
@@ -24,7 +24,7 @@ function CourseTracker({ majorKey, onBack }) {
 			setCatalog(majorCourseData[majorKey]);
 		}
 	}, [majorKey]);
-	
+
 	// Total and remaining credits calculation
 	const totalCredits = catalog
 		.flatMap((semester) => semester.courses)
@@ -40,12 +40,12 @@ function CourseTracker({ majorKey, onBack }) {
 		localStorage.removeItem(`catalog-${majorKey}`);
 		setCatalog(majorCourseData[majorKey]);
 	};
-	
+
 	// Handle course completion toggle
 	const handleCheckbox = (course, semesterIndex) => {
 		const updatedCatalog = [...catalog];
 		const semCourses = updatedCatalog[semesterIndex].courses;
-		
+
 		// Toggle the completed status of the course
 		const updatedCourses = semCourses.map((c) =>
 			c.code === course.code ? { ...c, completed: !c.completed } : c
@@ -82,7 +82,7 @@ function CourseTracker({ majorKey, onBack }) {
 			// If the course already exists in the target semester, revert the change
 			startSemesterCourses.splice(source.index, 0, removed);
 			setCatalog([...catalog]);
-			return; 
+			return;
 		}
 
 		// If the course doesn't exist, proceed with the drag-and-drop
@@ -158,6 +158,14 @@ function CourseTracker({ majorKey, onBack }) {
 					})}
 				</div>
 			</DragDropContext>
+			<footer>
+				<p>
+					© 2025 – Present • Developed by <strong>Abid</strong> •
+					<a href="https://github.com/abidzzz" target="_blank" rel="noopener noreferrer">
+						GitHub
+					</a>
+				</p>
+			</footer>
 		</div>
 	);
 }

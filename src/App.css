@@ -262,3 +262,33 @@ body {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
+
+footer {
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 0.875rem;
+  color: var(--overlay);
+  width: 100%;
+  background-color: var(--base);
+  border-top: 1px solid var(--surface1);
+  margin-top: 40px;
+}
+
+
+footer p {
+  margin: 0;
+  white-space: nowrap;
+}
+
+footer a {
+  color: var(--blue);
+  text-decoration: none;
+  margin-left: 4px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--sapphire);
+  text-decoration: underline;
+}

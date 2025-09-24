@@ -25,7 +25,17 @@ function MajorSelection({ onSelectMajor }) {
 					</button>
 				))}
 			</div>
+			<footer>
+				<p>
+					© 2025 – Present • Developed by <strong>Abid</strong> •
+					<a href="https://github.com/abidzzz" target="_blank" rel="noopener noreferrer">
+						GitHub
+					</a>
+				</p>
+			</footer>
+
 		</div>
+
 	);
 }
 
