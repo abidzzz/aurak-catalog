@@ -1,0 +1,264 @@
+:root {
+  --base: #1e1e2e;
+  --mantle: #181825;
+  --crust: #11111b;
+  --text: #cdd6f4;
+  --overlay: #6c7086;
+  --blue: #89b4fa;
+  --green: #a6e3a1;
+  --lavender: #b4befe;
+  --red: #f38ba8;
+  --maroon: #a9757e;
+  --yellow: #f9e2af;
+
+  --hover-green: #8ccf8a;
+  --hover-blue: #6a93e6;
+  --hover-maroon: #d6767f;
+
+  --shadow-black-30: rgba(0, 0, 0, 0.3);
+  --shadow-green-50: rgba(166, 227, 161, 0.5);
+  --shadow-green-hover: rgba(140, 207, 138, 0.7);
+  --shadow-blue-50: rgba(137, 180, 250, 0.5);
+  --shadow-blue-hover: rgba(106, 147, 230, 0.7);
+  --shadow-maroon-50: rgba(235, 160, 172, 0.5);
+  --shadow-maroon-hover: rgba(214, 118, 127, 0.7);
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--base);
+  color: var(--text);
+}
+
+.app {
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--lavender);
+}
+
+.main-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: var(--yellow);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.summer-semester {
+  grid-column: span 2;
+}
+
+.card {
+  background: var(--mantle);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px var(--shadow-black-30);
+}
+
+.completed-card {
+  background: var(--green);
+  padding: 15px;
+  border-radius: 12px;
+  color: var(--crust);
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--blue);
+}
+
+.course,
+.completed-course {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--crust);
+  color: var(--text);
+  padding: 8px;
+  border-radius: 8px;
+  margin: 6px 0;
+}
+
+.course:hover {
+  background: var(--overlay);
+}
+
+.credits {
+  margin-top: 10px;
+  font-weight: bold;
+  color: var(--yellow);
+}
+
+.course.completed {
+  text-decoration: line-through;
+  background: var(--overlay);
+}
+
+.credits-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.course input[type="checkbox"] {
+  appearance: none;
+  width: 19px;
+  height: 19px;
+  border-radius: 4px;
+  border: 2px solid var(--overlay);
+  background-color: var(--mantle);
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.course input[type="checkbox"]:not(:checked) {
+  background-color: var(--mantle);
+  border-color: var(--overlay);
+}
+
+.course input[type="checkbox"]:checked {
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+  box-shadow: 0 0 5px var(--yellow);
+}
+
+.course input[type="checkbox"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--crust);
+  border-radius: 2px;
+  transform: scale(1.2);
+  transition: all 0.3s ease;
+}
+
+.course input[type="checkbox"]:hover {
+  background-color: var(--overlay);
+}
+
+.course input[type="checkbox"]:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.course span {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.semester-credits {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--blue);
+  text-align: right;
+}
+
+.major-selection {
+  text-align: center;
+  padding: 20px;
+}
+
+.major-list {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.major-button {
+  background-color: var(--green);
+  color: var(--crust);
+  border: none;
+  border-radius: 6px;
+  margin: 10px;
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px var(--shadow-green-50);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.major-button:hover {
+  background-color: var(--hover-green);
+  box-shadow: 0 4px 12px var(--shadow-green-hover);
+}
+
+.major-button:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.back-button {
+  background-color: var(--blue);
+  color: var(--crust);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 6px var(--shadow-blue-50);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: var(--hover-blue);
+  box-shadow: 0 4px 12px var(--shadow-blue-hover);
+}
+
+.back-button:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+.reset-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--maroon);
+  color: var(--crust);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 6px var(--shadow-maroon-50);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  z-index: 100;
+}
+
+.reset-button:hover {
+  background-color: var(--hover-maroon);
+  box-shadow: 0 4px 12px var(--shadow-maroon-hover);
+}
+
+.reset-button:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}

@@ -1,0 +1,51 @@
+# AURAK Catalog 
+
+**Live Demo:** [https://https://abidzzz.github.io/](https://https://abidzzz.github.io/)  
+
+A personal project built with **React.js** to help AURAK students easily manage and track their course progress.  
+Select your **major**, then **drag & drop** courses and **check/uncheck** the ones you’ve completed.
+
+---
+## Screenshots
+
+![screenshot](screenshots/image2.png)
+![screenshot](screenshots/image.png)
+![screenshot](screenshots/image1.png)
+
+---
+
+## ✨ Features
+
+- Select your major
+- Drag and drop courses between sections
+- Mark courses as completed
+- Saves progress locally (optional)
+
+---
+## License
+
+This project is licensed under the **GNU General Public License v3.0**.
+
+---
+## 🚀 Getting Started
+
+To run the project locally:
+
+```bash
+# Clone the repo
+git clone https://github.com/abidzzz/aurak-catalog.git
+
+# Navigate into the directory
+cd aurak-catalog
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
+```
+
+---
+## Contributing
+
+Contributions are welcome! If you have any suggestions or improvements, feel free to open an issue or submit a pull request.
