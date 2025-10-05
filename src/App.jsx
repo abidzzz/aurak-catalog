@@ -12,6 +12,9 @@ function App() {
 	useEffect(() => {
 		if (selectedMajor) {
 			localStorage.setItem("selectedMajor", selectedMajor);
+			window.gtag('event', 'page_view', {
+				page_path: window.location.pathname + window.location.search,
+			});
 		} else {
 			localStorage.removeItem("selectedMajor");
 		}
