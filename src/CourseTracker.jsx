@@ -3,7 +3,6 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import "./App.css"; // Import CSS
 import { majorCourseData } from './courses.js';
 
-
 function CourseTracker({ majorKey, onBack }) {
 	const [catalog, setCatalog] = useState([]);
 
@@ -17,7 +16,6 @@ function CourseTracker({ majorKey, onBack }) {
 	// Load catalog from localStorage or initialize from majorCourseData
 	useEffect(() => {
 		const savedCatalog = localStorage.getItem(`catalog-${majorKey}`);
-
 		if (savedCatalog) {
 			setCatalog(JSON.parse(savedCatalog));
 		} else {
@@ -69,7 +67,6 @@ function CourseTracker({ majorKey, onBack }) {
 			return;
 		}
 
-
 		const startSemesterCourses = [...catalog[startSemesterIndex].courses];
 		const endSemesterCourses = [...catalog[endSemesterIndex].courses];
 
@@ -94,8 +91,6 @@ function CourseTracker({ majorKey, onBack }) {
 
 		setCatalog(updatedCatalog); // Update the catalog with the new state
 	};
-
-
 
 	return (
 		<div className="app">
@@ -134,11 +129,12 @@ function CourseTracker({ majorKey, onBack }) {
 														{...provided.draggableProps}
 														{...provided.dragHandleProps}
 														className={`course ${course.completed ? "completed" : ""}`}
+														onClick={() => handleCheckbox(course, index)} // Toggle the completion when clicking anywhere on the course
 													>
 														<input
 															type="checkbox"
 															checked={course.completed || false}
-															onChange={() => handleCheckbox(course, index)}
+															onChange={() => handleCheckbox(course, index)} // Handle checkbox change (still works)
 														/>
 														<span>
 															<strong>{course.code}</strong> - {course.title} ({course.credits} cr)
@@ -146,6 +142,7 @@ function CourseTracker({ majorKey, onBack }) {
 													</div>
 												)}
 											</Draggable>
+
 										))}
 										{provided.placeholder}
 										<div className="semester-credits">
