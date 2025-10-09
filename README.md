@@ -47,11 +47,11 @@ npm start
 ---
 ## TODO:
 - Find a better way to store courses instead of `courses.js`
-- Fix course selection behavior: allow clicking on course name to select/unselect even with drag-and-drop active
 - Show prerequisites for each course
 - Fix course selection when prerequisites aren't completed
 - Add more courses
 - Implement mobile view
+- ~~Fix course selection behavior: allow clicking on course name to select/unselect even with drag-and-drop active~~
 
 ---
 ## Contributing
