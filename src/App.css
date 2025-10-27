@@ -292,3 +292,35 @@ footer a:hover {
   color: var(--sapphire);
   text-decoration: underline;
 }
+
+/* Prerequisite Tooltip */
+.prereq-tooltip {
+  position: absolute;
+  background: var(--mantle);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--blue);
+  box-shadow: 0 4px 8px var(--shadow-black-30);
+  z-index: 1000;
+  max-width: 250px;
+  font-size: 0.9em;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.prereq-tooltip.show {
+  opacity: 1;
+}
+
+.prereq-tooltip strong {
+  color: var(--lavender);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

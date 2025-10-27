@@ -6,22 +6,46 @@ import { majorCourseData } from './courses.js';
 function CourseTracker({ majorKey, onBack }) {
 	const [catalog, setCatalog] = useState([]);
 
-	// Save catalog to localStorage whenever it changes
-	useEffect(() => {
-		if (catalog.length > 0) {
-			localStorage.setItem(`catalog-${majorKey}`, JSON.stringify(catalog));
-		}
-	}, [catalog, majorKey]);
+  useEffect(() => {
+    const savedCatalog = localStorage.getItem(`catalog-${majorKey}`);
+    if (savedCatalog) {
+      const parsedCatalog = JSON.parse(savedCatalog);
+      
+      // Merge with original data to preserve prerequisites
+      const originalCatalog = majorCourseData[majorKey];
+      const mergedCatalog = parsedCatalog.map((semester, index) => {
+        if (originalCatalog[index]) {
+          return {
+            ...semester,
+            courses: semester.courses.map(course => {
+              const originalCourse = originalCatalog[index].courses.find(oc => oc.code === course.code);
+              return {
+                ...course,
+                prerequisites: originalCourse?.prerequisites || [],
+                corequisites: originalCourse?.corequisites || []
+              };
+            })
+          };
+        }
+        return semester;
+      });
+      
+      setCatalog(mergedCatalog);
+    } else {
+      setCatalog(majorCourseData[majorKey]);
+    }
+  }, [majorKey]);
 
-	// Load catalog from localStorage or initialize from majorCourseData
-	useEffect(() => {
-		const savedCatalog = localStorage.getItem(`catalog-${majorKey}`);
-		if (savedCatalog) {
-			setCatalog(JSON.parse(savedCatalog));
-		} else {
-			setCatalog(majorCourseData[majorKey]);
-		}
-	}, [majorKey]);
+  // Save catalog to localStorage whenever it changes
+  useEffect(() => {
+    if (catalog.length > 0) {
+      localStorage.setItem(`catalog-${majorKey}`, JSON.stringify(catalog));
+    }
+  }, [catalog, majorKey]);
+
+
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [hoveredCourse, setHoveredCourse] = useState(null);
 
 	// Total and remaining credits calculation
 	const totalCredits = catalog
@@ -52,6 +76,29 @@ function CourseTracker({ majorKey, onBack }) {
 		updatedCatalog[semesterIndex].courses = updatedCourses;
 		setCatalog(updatedCatalog);
 	};
+
+  const handleCourseHover = (course, event) => {
+    setHoveredCourse(course);
+    const rect = event.currentTarget.getBoundingClientRect();
+    setTooltipPosition({
+      x: rect.left + window.scrollX,
+      y: rect.bottom + window.scrollY + 5
+    });
+  };
+
+  const getPrerequisiteText = (course) => {
+    if (course.prerequisites && course.prerequisites.length > 0) {
+      return `Prerequisites: ${course.prerequisites.join(', ')}`;
+    }
+    if (course.corequisites && course.corequisites.length > 0) {
+      return `Corequisites: ${course.corequisites.join(', ')}`;
+    }
+    return 'No prerequisites';
+  };
+
+  const handleCourseLeave = () => {
+    setHoveredCourse(null);
+  };
 
 	// Handle drag and drop functionality
 	const handleDragEnd = (result) => {
@@ -130,6 +177,8 @@ function CourseTracker({ majorKey, onBack }) {
 														{...provided.dragHandleProps}
 														className={`course ${course.completed ? "completed" : ""}`}
 														onClick={() => handleCheckbox(course, index)} // Toggle the completion when clicking anywhere on the course
+                            onMouseEnter={(e) => handleCourseHover(course, e)}
+                            onMouseLeave={handleCourseLeave}
 													>
 														<input
 															type="checkbox"
@@ -155,6 +204,18 @@ function CourseTracker({ majorKey, onBack }) {
 					})}
 				</div>
 			</DragDropContext>
+    {hoveredCourse && (hoveredCourse.prerequisites?.length > 0 || hoveredCourse.corequisites?.length > 0) && (
+        <div 
+          className="prereq-tooltip show"
+          style={{
+            left: `${tooltipPosition.x}px`,
+            top: `${tooltipPosition.y}px`
+          }}
+        >
+          <strong>{hoveredCourse.code}</strong><br/>
+          {getPrerequisiteText(hoveredCourse)}
+        </div>
+      )}
 			<footer>
 				<p>
 					© 2025 – Present • Developed by <strong>Abid</strong> •
