@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/aurak-catalog/static/css/main.9de218f7.css",
-    "main.js": "/aurak-catalog/static/js/main.3958b51d.js",
-    "static/js/453.d983cd7d.chunk.js": "/aurak-catalog/static/js/453.d983cd7d.chunk.js",
-    "index.html": "/aurak-catalog/index.html",
-    "main.9de218f7.css.map": "/aurak-catalog/static/css/main.9de218f7.css.map",
-    "main.3958b51d.js.map": "/aurak-catalog/static/js/main.3958b51d.js.map",
-    "453.d983cd7d.chunk.js.map": "/aurak-catalog/static/js/453.d983cd7d.chunk.js.map"
+    "main.css": "/aurak-catalog/dev/static/css/main.9de218f7.css",
+    "main.js": "/aurak-catalog/dev/static/js/main.8508a3d5.js",
+    "static/js/453.d983cd7d.chunk.js": "/aurak-catalog/dev/static/js/453.d983cd7d.chunk.js",
+    "index.html": "/aurak-catalog/dev/index.html",
+    "main.9de218f7.css.map": "/aurak-catalog/dev/static/css/main.9de218f7.css.map",
+    "main.8508a3d5.js.map": "/aurak-catalog/dev/static/js/main.8508a3d5.js.map",
+    "453.d983cd7d.chunk.js.map": "/aurak-catalog/dev/static/js/453.d983cd7d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9de218f7.css",
-    "static/js/main.3958b51d.js"
+    "static/js/main.8508a3d5.js"
   ]
 }
