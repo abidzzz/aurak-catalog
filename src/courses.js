@@ -105,7 +105,7 @@ const majorCourseData = {
       courses: [
         { code: "ENGR 450", title: "Engineering Seminar", credits: 1 },
         { code: "CSAI 484", title: "Internet of Things System", credits: 3, prerequisites: ["CSCI 232", "CSCI 462"] },
-        { code: "GEN ED", title: "Social and Behavioral Science", credits: 3 },
+        { code: "GEN-ED", title: "Social and Behavioral Science", credits: 3 },
         { code: "CENG 411", title: "Software Engineering", credits: 3, prerequisites: ["CSCI 215"] },
         { code: "CENG 492", title: "Senior Design Project I", credits: 2, prerequisites: ["ENGR 450"], corequisites: ["ECEN 491"] },
         { code: "CSAI 350", title: "Introduction to Artificial Intelligence", credits: 3, prerequisites: ["CSCI 215", "STAT 346"] }

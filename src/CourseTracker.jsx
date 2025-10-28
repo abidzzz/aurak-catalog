@@ -1,22 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import "./App.css"; 
+import "./App.css";
 import { majorCourseData } from './courses.js';
 
 function CourseTracker({ majorKey, onBack }) {
+	// Variables 
 	const [catalog, setCatalog] = useState([]);
 	const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 	const [hoveredCourse, setHoveredCourse] = useState(null);
 	const [warning, setWarning] = useState({ show: false, message: '' });
 	const [shakingCourse, setShakingCourse] = useState(null);
 
+	// Total and remaining credits calculation
+	const totalCredits = catalog
+		.flatMap((semester) => semester.courses)
+		.filter((course) => course.completed)
+		.reduce((sum, course) => sum + course.credits, 0);
 
+	const remainingCredits = catalog
+		.flatMap((semester) => semester.courses)
+		.filter((course) => !course.completed)
+		.reduce((sum, course) => sum + course.credits, 0);
+
+	const resetProgress = () => {
+		localStorage.removeItem(`catalog-${majorKey}`);
+		setCatalog(majorCourseData[majorKey]);
+	};
+	const totalPossibleCredits = catalog
+		.flatMap((semester) => semester.courses)
+		.reduce((sum, course) => sum + course.credits, 0);
+
+	const progressPercentage = totalPossibleCredits > 0
+		? (totalCredits / totalPossibleCredits) * 100
+		: 0;
+
+	// To Store and Retrieve Catalog from localStorage
 	useEffect(() => {
 		const savedCatalog = localStorage.getItem(`catalog-${majorKey}`);
 		if (savedCatalog) {
 			const parsedCatalog = JSON.parse(savedCatalog);
 
-			// Merge with original data to preserve prerequisites
+			// Merge prerequisites and corequisites from original data
 			const originalCatalog = majorCourseData[majorKey];
 			const mergedCatalog = parsedCatalog.map((semester, index) => {
 				if (originalCatalog[index]) {
@@ -75,6 +99,16 @@ function CourseTracker({ majorKey, onBack }) {
 		return { valid: true };
 	};
 
+	const getPrerequisiteText = (course) => {
+		if (course.prerequisites && course.prerequisites.length > 0) {
+			return `Prerequisites: ${course.prerequisites.join(', ')}`;
+		}
+		if (course.corequisites && course.corequisites.length > 0) {
+			return `Corequisites: ${course.corequisites.join(', ')}`;
+		}
+		return 'No prerequisites';
+	};
+
 	// handleCheckbox function 
 	const handleCheckbox = (course, semesterIndex) => {
 		const validation = checkPrerequisites(course, semesterIndex);
@@ -97,7 +131,7 @@ function CourseTracker({ majorKey, onBack }) {
 				setShakingCourse(null);
 			}, 600);
 
-			return; // Don't toggle the checkbox
+			return;
 		}
 
 		// If validation passes, proceed with toggle
@@ -113,29 +147,6 @@ function CourseTracker({ majorKey, onBack }) {
 	};
 
 
-	// Total and remaining credits calculation
-	const totalCredits = catalog
-		.flatMap((semester) => semester.courses)
-		.filter((course) => course.completed)
-		.reduce((sum, course) => sum + course.credits, 0);
-
-	const remainingCredits = catalog
-		.flatMap((semester) => semester.courses)
-		.filter((course) => !course.completed)
-		.reduce((sum, course) => sum + course.credits, 0);
-
-	const resetProgress = () => {
-		localStorage.removeItem(`catalog-${majorKey}`);
-		setCatalog(majorCourseData[majorKey]);
-	};
-	const totalPossibleCredits = catalog
-		.flatMap((semester) => semester.courses)
-		.reduce((sum, course) => sum + course.credits, 0);
-
-	const progressPercentage = totalPossibleCredits > 0
-		? (totalCredits / totalPossibleCredits) * 100
-		: 0;
-
 	const handleCourseHover = (course, event) => {
 		setHoveredCourse(course);
 		const rect = event.currentTarget.getBoundingClientRect();
@@ -143,16 +154,6 @@ function CourseTracker({ majorKey, onBack }) {
 			x: rect.left + window.scrollX,
 			y: rect.bottom + window.scrollY + 5
 		});
-	};
-
-	const getPrerequisiteText = (course) => {
-		if (course.prerequisites && course.prerequisites.length > 0) {
-			return `Prerequisites: ${course.prerequisites.join(', ')}`;
-		}
-		if (course.corequisites && course.corequisites.length > 0) {
-			return `Corequisites: ${course.corequisites.join(', ')}`;
-		}
-		return 'No prerequisites';
 	};
 
 	const handleCourseLeave = () => {
@@ -260,10 +261,10 @@ function CourseTracker({ majorKey, onBack }) {
 															type="checkbox"
 															checked={course.completed || false}
 															onChange={(e) => {
-																e.stopPropagation(); // This prevents the event from bubbling up to the parent div
+																e.stopPropagation();
 																handleCheckbox(course, index);
 															}}
-															onClick={(e) => e.stopPropagation()} // Additional safety
+															onClick={(e) => e.stopPropagation()}
 														/>
 														<span>
 															<strong>{course.code}</strong> - {course.title} ({course.credits} cr)
@@ -299,7 +300,7 @@ function CourseTracker({ majorKey, onBack }) {
 				</div>
 			)}
 
-			{/* Warning Toast - Bottom Right (Catppuccin Mocha Style) */}
+			{/* Warning Toast - Bottom Right */}
 			{warning.show && (
 				<div className="warning-toast">
 					<div className="warning-icon">⚠️</div>
