@@ -9,9 +9,9 @@ const majorCourseData = {
       courses: [
         { code: "PHYS 110", title: "University Physics I", credits: 3, prerequisites: [], corequisites: ["PHYS 111"] },
         { code: "PHYS 111", title: "University Physics I Lab", credits: 1, corequisites: ["PHYS 110"] },
-        { code: "ENGL 101", title: "Composition", credits: 3, prerequisites: ["ENGL 099"] },
+        { code: "ENGL 101", title: "Composition", credits: 3 },
         { code: "ENGR 107", title: "Introduction to Engineering", credits: 2, corequisites: ["MATH 113"] },
-        { code: "MATH 113", title: "Calculus I", credits: 3, prerequisites: ["MATH 095"] },
+        { code: "MATH 113", title: "Calculus I", credits: 3 },
         { code: "ENVS 102", title: "Sustainability and Human-Environment Relations", credits: 3 },
         { code: "UNIV 100", title: "University First-Year Transition", credits: 1 }
       ]
@@ -131,8 +131,8 @@ const majorCourseData = {
       semester: "First Semester",
       courses: [
         { code: "CSCI 104", title: "Introduction to Computing", credits: 3 },
-        { code: "ENGL 101", title: "Composition", credits: 3, prerequisites: ["ENGL 099"] },
-        { code: "MATH 113", title: "Calculus I", credits: 3, prerequisites: ["MATH 095"] },
+        { code: "ENGL 101", title: "Composition", credits: 3 },
+        { code: "MATH 113", title: "Calculus I", credits: 3 },
         { code: "PHYS 110", title: "University Physics I", credits: 3, corequisites: ["PHYS 111"] },
         { code: "PHYS 111", title: "University Physics I Lab", credits: 1, corequisites: ["PHYS 110"] },
         { code: "UNIV 100", title: "University First-Year Transition", credits: 1 }
@@ -247,69 +247,87 @@ const majorCourseData = {
       semester: "First Semester",
       courses: [
         { code: "CSCI 104", title: "Introduction to Computing", credits: 3 },
-        { code: "EMSL 101", title: "Composition", credits: 3 },
+        { code: "ENGL 101", title: "Composition", credits: 3 },
         { code: "MATH 113", title: "Calculus I", credits: 3 },
-        { code: "PHYS 110", title: "University Physics I", credits: 3 },
-        { code: "PHYS 111", title: "University Physics I Lab", credits: 1 },
-        { code: "DINV 100", title: "University First-Year Transition", credits: 1 }
+        { code: "PHYS 110", title: "University Physics I", credits: 3, corequisites: ["PHYS 111"] },
+        { code: "PHYS 111", title: "University Physics I Lab", credits: 1, corequisites: ["PHYS 110"] },
+        { code: "UNIV 100", title: "University First-Year Transition", credits: 1 }
       ]
     },
     {
       year: 1,
       semester: "Second Semester",
       courses: [
-        { code: "PHIL 100/EMSL 200/MST 100", title: "Critical Thinking and Reasoning/Advanced Composition/Introduction to Islam in World Culture", credits: 3 },
-        { code: "CSCI 112", title: "Introduction to Computer Programming", credits: 3 },
-        { code: "CSCI 113", title: "Introduction to Computer Programming Lab", credits: 1 },
-        { code: "MATH 114", title: "Calculus II", credits: 3 },
-        { code: "PHYS 220", title: "University Physics II", credits: 3 },
-        { code: "PHYS 221", title: "University Physics II Lab", credits: 1 },
+        { code: "CSCI 112", title: "Introduction to Computer Programming", credits: 3, corequisites: ["CSCI 113"] },
+        { code: "CSCI 113", title: "Introduction to Computer Programming Lab", credits: 1, corequisites: ["CSCI 112"] },
+        { code: "MATH 114", title: "Calculus II", credits: 3, prerequisites: ["MATH 113"] },
+        { code: "PHYS 220", title: "University Physics II", credits: 3, prerequisites: ["PHYS 110"] },
+        { code: "PHYS 221", title: "University Physics II Lab", credits: 1, corequisites: ["PHYS 220"] },
+        { code: "MEST 100", title: "Introduction to Islam in World Culture", credits: 3 },
         { code: "GEN ED", title: "Humanities/Fine Arts Course", credits: 3 }
       ]
     },
 
-    // Second Year
     {
       year: 2,
       semester: "First Semester",
       courses: [
-        { code: "CSCI 211", title: "Object Oriented Programming", credits: 3 },
-        { code: "MATH 213", title: "Calculus III", credits: 3 },
-        { code: "MATH 225", title: "Discrete Mathematics", credits: 3 },
-        { code: "CSCI 232", title: "Computer Organization", credits: 3 },
-        { code: "GEN ED", title: "Social and Behavioral Sciences Course", credits: 3 }
+        { code: "CSCI 211", title: "Object-Oriented Programming", credits: 3, prerequisites: ["CSCI 112"] },
+        { code: "MATH 213", title: "Calculus III", credits: 3, prerequisites: ["MATH 114"] },
+        { code: "MATH 225", title: "Discrete Mathematics", credits: 3, prerequisites: ["MATH 113"] },
+        { code: "CSCI 232", title: "Computer Organization", credits: 3, prerequisites: ["CSCI 112"] },
+        { code: "GEN ED", title: "Social and Behavioral Science", credits: 3 }
       ]
     },
+
     {
       year: 2,
       semester: "Second Semester",
       courses: [
-        { code: "CSCI 215", title: "Data Structures and Algorithms", credits: 3 },
-        { code: "EEEN 331", title: "Digital Systems Design", credits: 3 },
-        { code: "EEEN 332", title: "Digital Systems Design Lab", credits: 1 },
-        { code: "EMSR 200", title: "Engineering Statistics", credits: 3 },
-        { code: "EMSR 202", title: "English for Workplace Communication", credits: 3 },
-        { code: "MATH 203", title: "Linear Algebra", credits: 3 },
+        { code: "CSCI 215", title: "Data Structures and Algorithms", credits: 3, prerequisites: ["CSCI 211", "MATH 225"] },
+        { code: "EEEN 331", title: "Digital System Design", credits: 3, prerequisites: ["PHYS 220"], corequisites: ["EEEN 332"] },
+        { code: "EEEN 332", title: "Digital Systems Design Lab", credits: 1, corequisites: ["EEEN 331"] },
+        { code: "ENGR 200", title: "Engineering Statistics", credits: 3 },
+        { code: "PHIL 100", title: "Critical Thinking and Reasoning", credits: 3, prerequisites: ["ENGL 101"] },
+        { code: "MATH 203", title: "Linear Algebra", credits: 3, prerequisites: ["MATH 113"] }
+      ]
+    },
+    {
+      year: 2,
+      semester: "Summer Semester",
+      courses: [
+        { code: "CSAI 390", title: "Internship I", credits: 3 }
       ]
     },
 
     // Third Year
     {
       year: 3,
-      semester: "Summer Semester",
+      semester: "First Semester",
       courses: [
-        { code: "CSAJ 300", title: "Internship I", credits: 3 }
+        { code: "CSAI 350", title: "Introduction to Artificial Intelligence", credits: 3, prerequisites: ["CSCI 215", "STAT 346"] },
+        { code: "ENVS 102", title: "Sustainability and Human-Environment Relations", credits: 3 },
+        { code: "CSCI 312", title: "Operating System Fundamentals", credits: 3, prerequisites: ["CSCI 215"] },
+        { code: "CSCI 326", title: "Database Systems", credits: 3, prerequisites: ["CSCI 211"] },
+        { code: "UNIV 200", title: "Innovation, Entrepreneurship and Sustainability", credits: 3 }
       ]
     },
     {
       year: 3,
       semester: "Second Semester",
       courses: [
-        { code: "CSAI 350", title: "Introduction to Artificial Intelligence", credits: 3 },
-        { code: "ENVS 101", title: "Sustainability and Human Environment Relations", credits: 3 },
-        { code: "CSCI 312", title: "Operating System Fundamentals", credits: 3 },
-        { code: "CSCI 326", title: "Database Systems", credits: 3 },
-        { code: "DINV 200", title: "Innovation, Entrepreneurship, and Sustainability", credits: 3 }
+        { code: "CSCI 315", title: "Design and Analysis of Algorithms", credits: 3, prerequisites: ["CSCI 215"] },
+        { code: "CSAI 351", title: "Data Science", credits: 3, prerequisites: ["CSAI 350", "MATH 203"] },
+        { code: "CSCI 462", title: "Data Communications and Computer Networks", credits: 3, prerequisites: ["CSCI 112"] },
+        { code: "CSCI 415", title: "Introduction to Parallel Programming", credits: 3, prerequisites: ["CSCI 215"] },
+        { code: "UAES 200", title: "Survey of United Arab Emirates Studies", credits: 3 }
+      ]
+    },
+    {
+      year: 3,
+      semester: "Summer Semester",
+      courses: [
+        { code: "CSAI 391", title: "Internship II", credits: 3}
       ]
     },
 
@@ -318,37 +336,19 @@ const majorCourseData = {
       year: 4,
       semester: "First Semester",
       courses: [
-        { code: "CSCI 315", title: "Design and Analysis of Algorithms", credits: 3 },
-        { code: "CSAI 462", title: "Data Science", credits: 3 },
-        { code: "CSCI 462", title: "Data Comm. and Computer Networks", credits: 3 },
-        { code: "CSCI 415", title: "Introduction to Parallel Programming", credits: 3 },
-        { code: "UMS 200", title: "Survey of United Arab Emirates Studies", credits: 3 }
-      ]
-    },
-    {
-      year: 4,
-      semester: "Summer Semester",
-      courses: [
-        { code: "CSAJ 931", title: "Internship II", credits: 3 }
-      ]
-    },
-    {
-      year: 4,
-      semester: "Third Semester",
-      courses: [
-        { code: "CSAI 450", title: "Machine Learning", credits: 3 },
-        { code: "CSAI 451", title: "Machine Learning Lab", credits: 1 },
-        { code: "CENG 411", title: "Software Engineering", credits: 3 },
+        { code: "CSAI 450", title: "Machine Learning", credits: 3, prerequisites: ["CSAI 350", "CSAI 351"], corequisites: ["CSAI 451"] },
+        { code: "CSAI 451", title: "Machine Learning Lab", credits: 1, corequisites: ["CSAI 450"] },
+        { code: "CENG 411", title: "Software Engineering", credits: 3, prerequisites: ["CSCI 215"] },
         { code: "CSCI 492", title: "Senior Design Project I", credits: 2 },
-        { code: "CSAI 490", title: "Professional Software Practice", credits: 2 },
+        { code: "CSAI 490", title: "Professional Software Practice", credits: 2, prerequisites: ["CSCI 492"] },
         { code: "CSAI 484", title: "Internet of Things System", credits: 3 }
       ]
     },
     {
       year: 4,
-      semester: "Fourth Semester",
+      semester: "Second Semester",
       courses: [
-        { code: "CSCI 493", title: "Senior Design Project II", credits: 4 },
+        { code: "CSCI 493", title: "Senior Design Project II", credits: 4 , prerequisites: ["CSCI 492"] },
         { code: "CSAI 432", title: "Natural Language Processing", credits: 3 },
         { code: "CSAI 433", title: "Data Visualization", credits: 3 },
         { code: "Elective", title: "Technical Elective I", credits: 3 },
@@ -738,8 +738,8 @@ const majorCourseData = {
       "courses": [
         { code: "BIOL 112", title: "University Biology I", credits: 3, corequisites: ["BIOL 113"] },
         { code: "BIOL 113", title: "University Biology I Lab", credits: 1, corequisites: ["BIOL 112"] },
-        { code: "MATH 111", title: "Calculus with Life Sciences Applications", credits: 3, prerequisites: ["MATH 095"] },
-        { code: "ENG 101", title: "Composition", credits: 3, prerequisites: ["ENGL 099"] },
+        { code: "MATH 111", title: "Calculus with Life Sciences Applications", credits: 3 },
+        { code: "ENG 101", title: "Composition", credits: 3 },
         { code: "CHEM 111", title: "Principles of General Chemistry", credits: 3, corequisites: ["CHEM 112"] },
         { code: "CHEM 112", title: "Principles of General Chemistry Lab", credits: 1, corequisites: ["CHEM 111"] },
         { code: "UNIV 100", title: "University First - Year Transition", credits: 1 }
@@ -853,9 +853,9 @@ const majorCourseData = {
       "semester": "First Semester",
       "courses": [
         { code: "ARCH 121", title: "Basic Design I", credits: 4 },
-        { code: "MATH 113", title: "Calculus I", credits: 3, prerequisites: ["MATH 095"] },
+        { code: "MATH 113", title: "Calculus I", credits: 3 },
         { code: "INDS 112", title: "Design Communication 1: Sketching and Drawing for Interiors", credits: 3 },
-        { code: "ENGL 101", title: "Composition", credits: 3, prerequisites: ["ENGL 099"] },
+        { code: "ENGL 101", title: "Composition", credits: 3 },
         { code: "UNIV 100", title: "University First - Year Transition", credits: 1 }
       ]
     },
