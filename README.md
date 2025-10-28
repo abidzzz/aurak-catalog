@@ -46,12 +46,15 @@ npm start
 ```
 ---
 ## TODO:
+- Grade tracking & GPA calculation
+- Better prerequisite visualization with flow arrows
+- Multi-catalog year support (2024, 2025, etc.)
 - Find a better way to store courses instead of `courses.js`
-- Show prerequisites for each course
-- Fix course selection when prerequisites aren't completed
-- Add more courses
+- Show prerequisites for each course (5/9 completed)
 - Implement mobile view
 - ~~Fix course selection behavior: allow clicking on course name to select/unselect even with drag-and-drop active~~
+- ~~Fix course selection when prerequisites aren't completed~~
+- ~~Add more courses~~
 
 ---
 ## Contributing
