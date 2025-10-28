@@ -201,7 +201,7 @@ const majorCourseData = {
       year: 3,
       semester: "Second Semester",
       courses: [
-        { code: "GEN ED", title: "Social and Behavioral Science", credits: 3 },
+        { code: "GEN-ED", title: "Social and Behavioral Science", credits: 3 },
         { code: "CSCI 372", title: "Compiler Design", credits: 3, prerequisites: ["CSCI 232"] },
         { code: "CSCI 462", title: "Data Communications and Computer Networks", credits: 3, prerequisites: ["CSCI 112"] },
         { code: "CSCI 463", title: "Data Communications and Computer Networks Lab", credits: 1, corequisites: ["CSCI 462"] },
@@ -276,7 +276,7 @@ const majorCourseData = {
         { code: "MATH 213", title: "Calculus III", credits: 3, prerequisites: ["MATH 114"] },
         { code: "MATH 225", title: "Discrete Mathematics", credits: 3, prerequisites: ["MATH 113"] },
         { code: "CSCI 232", title: "Computer Organization", credits: 3, prerequisites: ["CSCI 112"] },
-        { code: "GEN ED", title: "Social and Behavioral Science", credits: 3 }
+        { code: "GEN-ED", title: "Social and Behavioral Science", credits: 3 }
       ]
     },
 
@@ -782,7 +782,7 @@ const majorCourseData = {
         { code: "BIOL 250", title: "Biochemistry I", credits: 3, prerequisites: ["CHEM 111", "CHEM 120"], corequisites: ["BIOL 251"] },
         { code: "BIOL 251", title: "Biochemistry I Lab", credits: 1, corequisites: ["BIOL 250"] },
         { code: "ENVS 102", title: "Sustainability and Human-Environment Relations", credits: 3 },
-        { code: "GEN ED", title: "Humanities and Fine Arts Elective ", credits: 3 }
+        { code: "GEN-ED", title: "Humanities and Fine Arts Elective ", credits: 3 }
       ]
     },
     {
@@ -938,7 +938,7 @@ const majorCourseData = {
         { code: "ARCH 421", title: "Architectural Design Studio 5", credits: 4, prerequisites: ["ARCH 322"] },
         { code: "ARCH 463", title: "Landscape Architecture", credits: 3, prerequisites: ["ARCH 322"] },
         { code: "MENG 468", title: "Building Utilities I: HVAC and Mechanical Building Services", credits: 3, prerequisites: ["PHYS 110", "ARCH 336"] },
-        { code: "GEN ED", title: "Humanities/Fine Arts Course", credits: 3 },
+        { code: "GEN-ED", title: "Humanities/Fine Arts Course", credits: 3 },
         { code: "ARCH 457", title: "Urban Design", credits: 3, corequisites: ["ARCH 463"] }
       ]
     },
@@ -994,8 +994,8 @@ const majorCourseData = {
       { code: "ENGL 101", title: "Composition", credits: 3, prerequisites: ["ENGL 099"] },
       { code: "ITEC 103", title: "Fundamentals of Information Technology", credits: 3 },
       { code: "UNIV 100", title: "University First - Year Transition", credits: 1 },
-      { code: "GEN ED", title: "Humanities/Fine Arts Course", credits: 3 },
-      { code: "GEN ED", title: "Social and Behavioral Science", credits: 3 }
+      { code: "GEN_ED", title: "Humanities/Fine Arts Course", credits: 3 },
+      { code: "GEN-ED-", title: "Social and Behavioral Science", credits: 3 }
     ]
   },
   {
@@ -1042,7 +1042,7 @@ const majorCourseData = {
       { code: "COMM 311", title: "Media Law and Ethics", credits: 3, prerequisites: ["COMM 111", "COMM 112", "COMM 113"] },
       { code: "COMM 321", title: "Theories of Media Communication", credits: 3, prerequisites: ["COMM 212", "COMM 222", "COMM 223"] },
       { code: "COMM 323", title: "News Reporting", credits: 3, prerequisites: ["COMM 212", "COMM 215"] },
-      { code: "GEN ED", title: "Natural Science Course", credits: 3 },
+      { code: "GEN-ED", title: "Natural Science Course", credits: 3 },
       { code: "Mass Communication", title: "Elective", credits: 3 }
     ]
   },
