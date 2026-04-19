@@ -36,32 +36,34 @@ function CourseTracker({ majorKey, onBack }) {
 
 	// To Store and Retrieve Catalog from localStorage
 	useEffect(() => {
+		const originalCatalog = majorCourseData[majorKey];
 		const savedCatalog = localStorage.getItem(`catalog-${majorKey}`);
+		
 		if (savedCatalog) {
 			const parsedCatalog = JSON.parse(savedCatalog);
-
-			// Merge prerequisites and corequisites from original data
-			const originalCatalog = majorCourseData[majorKey];
-			const mergedCatalog = parsedCatalog.map((semester, index) => {
-				if (originalCatalog[index]) {
-					return {
-						...semester,
-						courses: semester.courses.map(course => {
-							const originalCourse = originalCatalog[index].courses.find(oc => oc.code === course.code);
-							return {
-								...course,
-								prerequisites: originalCourse?.prerequisites || [],
-								corequisites: originalCourse?.corequisites || []
-							};
-						})
-					};
-				}
-				return semester;
+			
+			// Create a map of course codes to their saved completed status
+			const completedStatusMap = new Map();
+			parsedCatalog.forEach(semester => {
+				semester.courses.forEach(course => {
+					if (course.completed) {
+						completedStatusMap.set(course.code, true);
+					}
+				});
 			});
-
-			setCatalog(mergedCatalog);
+			
+			// Apply saved completed status to the fresh catalog structure
+			const updatedCatalog = originalCatalog.map(semester => ({
+				...semester,
+				courses: semester.courses.map(course => ({
+					...course,
+					completed: completedStatusMap.get(course.code) || false
+				}))
+			}));
+			
+			setCatalog(updatedCatalog);
 		} else {
-			setCatalog(majorCourseData[majorKey]);
+			setCatalog(originalCatalog);
 		}
 	}, [majorKey]);
 
