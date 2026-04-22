@@ -124,7 +124,7 @@ const majorCourseData = {
           "credits": 3
         },
         {
-          "code": "GEN ED",
+          "code": "GEN-ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         }
@@ -649,7 +649,7 @@ const majorCourseData = {
           "prerequisites": []
         },
         {
-          "code": "GEN ED",
+          "code": "GEN-ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         }
@@ -1113,7 +1113,7 @@ const majorCourseData = {
           ]
         },
         {
-          "code": "GEN ED",
+          "code": "GEN-ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         }
@@ -1729,7 +1729,7 @@ const majorCourseData = {
           "corequisites": []
         },
         {
-          "code": "GEN ED",
+          "code": "GEN-ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         }
@@ -2927,7 +2927,7 @@ const majorCourseData = {
       "semester": "First Semester",
       "courses": [
         {
-          "code": "GEN ED",
+          "code": "GEN-ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         },
@@ -3890,7 +3890,7 @@ const majorCourseData = {
           "corequisites": []
         },
         {
-          "code": "GEN ED",
+          "code": "GEN-ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         },
@@ -4091,7 +4091,7 @@ const majorCourseData = {
           "corequisites": []
         },
         {
-          "code": "GEN ED",
+          "code": "GEN-ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         },
