@@ -35,37 +35,47 @@ function CourseTracker({ majorKey, onBack }) {
 		: 0;
 
 	// To Store and Retrieve Catalog from localStorage
-	useEffect(() => {
-		const originalCatalog = majorCourseData[majorKey];
-		const savedCatalog = localStorage.getItem(`catalog-${majorKey}`);
+// To Store and Retrieve Catalog from localStorage
+useEffect(() => {
+	const originalCatalog = majorCourseData[majorKey];
+	const savedCatalog = localStorage.getItem(`catalog-${majorKey}`);
+	
+	if (savedCatalog) {
+		const parsedCatalog = JSON.parse(savedCatalog);
 		
-		if (savedCatalog) {
-			const parsedCatalog = JSON.parse(savedCatalog);
+		// Update the saved catalog with fresh prerequisite data from original
+		const updatedCatalog = parsedCatalog.map((savedSemester) => {
+			// Find matching semester in original catalog by year and semester name
+			const originalSemester = originalCatalog.find(orig => 
+				orig.year === savedSemester.year && orig.semester === savedSemester.semester
+			);
 			
-			// Create a map of course codes to their saved completed status
-			const completedStatusMap = new Map();
-			parsedCatalog.forEach(semester => {
-				semester.courses.forEach(course => {
-					if (course.completed) {
-						completedStatusMap.set(course.code, true);
+			if (!originalSemester) return savedSemester;
+			
+			return {
+				...savedSemester,
+				courses: savedSemester.courses.map(savedCourse => {
+					// Find fresh course data from original
+					const freshCourse = originalSemester.courses.find(c => c.code === savedCourse.code);
+					
+					if (freshCourse) {
+						// Merge: keep saved position and completion, but use fresh prerequisites/title/credits
+						return {
+							...freshCourse,
+							completed: savedCourse.completed || false
+						};
 					}
-				});
-			});
-			
-			// Apply saved completed status to the fresh catalog structure
-			const updatedCatalog = originalCatalog.map(semester => ({
-				...semester,
-				courses: semester.courses.map(course => ({
-					...course,
-					completed: completedStatusMap.get(course.code) || false
-				}))
-			}));
-			
-			setCatalog(updatedCatalog);
-		} else {
-			setCatalog(originalCatalog);
-		}
-	}, [majorKey]);
+					// Course might have been removed from curriculum, keep saved version as is
+					return savedCourse;
+				})
+			};
+		});
+		
+		setCatalog(updatedCatalog);
+	} else {
+		setCatalog(originalCatalog);
+	}
+}, [majorKey]);
 
 	// Save catalog to localStorage whenever it changes
 	useEffect(() => {
