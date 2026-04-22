@@ -28,13 +28,7 @@ const majorCourseData = {
           "code": "ENGL 101",
           "title": "Composition",
           "credits": 3,
-          "prerequisites": [
-            "Requisite score on the EmSAT",
-            "IETLS",
-            "TOEFL",
-            "OOPT",
-            "or completion of required English foundation course(s)"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -185,7 +179,7 @@ const majorCourseData = {
           "title": "Engineering Statistics",
           "credits": 3,
           "prerequisites": [
-            "Math 114"
+            "MATH 114"
           ],
           "corequisites": []
         }
@@ -551,13 +545,7 @@ const majorCourseData = {
           "code": "ENGL 101",
           "title": "Composition",
           "credits": 3,
-          "prerequisites": [
-            "Requisite score on the EmSAT",
-            "IETLS",
-            "TOEFL",
-            "OOPT",
-            "or completion of required English foundation course(s)"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -753,7 +741,7 @@ const majorCourseData = {
           "title": "Engineering Statistics",
           "credits": 3,
           "prerequisites": [
-            "Math 114"
+            "MATH 114"
           ],
           "corequisites": []
         },
@@ -1015,13 +1003,7 @@ const majorCourseData = {
           "code": "ENGL 101",
           "title": "Composition",
           "credits": 3,
-          "prerequisites": [
-            "Requisite score on the EmSAT",
-            "IETLS",
-            "TOEFL",
-            "OOPT",
-            "or completion of required English foundation course(s)"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -1471,9 +1453,7 @@ const majorCourseData = {
           "code": "ENGR 107",
           "title": "Introduction to Engineering",
           "credits": 2,
-          "prerequisites": [
-            "Math Placement Test score qualifying student for MATH 113"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -1776,7 +1756,7 @@ const majorCourseData = {
           "title": "Engineering Statistics",
           "credits": 3,
           "prerequisites": [
-            "Math 114"
+            "MATH 114"
           ],
           "corequisites": []
         },
@@ -1950,22 +1930,14 @@ const majorCourseData = {
           "code": "ENGR 107",
           "title": "Introduction to Engineering",
           "credits": 2,
-          "prerequisites": [
-            "Math Placement Test score qualifying student for MATH 113"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
           "code": "ENGL 101",
           "title": "Composition",
           "credits": 3,
-          "prerequisites": [
-            "Requisite score on the EmSAT",
-            "IETLS",
-            "TOEFL",
-            "OOPT",
-            "or completion of required English foundation course(s)"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -2225,7 +2197,7 @@ const majorCourseData = {
           "title": "Engineering Statistics",
           "credits": 3,
           "prerequisites": [
-            "Math 114"
+            "MATH 114"
           ],
           "corequisites": []
         },
@@ -2498,22 +2470,14 @@ const majorCourseData = {
           "code": "ENGL 101",
           "title": "Composition",
           "credits": 3,
-          "prerequisites": [
-            "Requisite score on the EmSAT",
-            "IETLS",
-            "TOEFL",
-            "OOPT",
-            "or completion of required English foundation course(s)"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
           "code": "ENGR 107",
           "title": "Introduction to Engineering",
           "credits": 2,
-          "prerequisites": [
-            "Math Placement Test score qualifying student for MATH 113"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -2711,7 +2675,7 @@ const majorCourseData = {
           "title": "Engineering Statistics",
           "credits": 3,
           "prerequisites": [
-            "Math 114"
+            "MATH 114"
           ],
           "corequisites": []
         },
@@ -3549,13 +3513,7 @@ const majorCourseData = {
           "code": "ENGL 101",
           "title": "Composition",
           "credits": 3,
-          "prerequisites": [
-            "Requisite score on the EmSAT",
-            "IETLS",
-            "TOEFL",
-            "OOPT",
-            "or completion of required English foundation course(s)"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -4067,13 +4025,7 @@ const majorCourseData = {
           "code": "ENGL 101",
           "title": "Composition",
           "credits": 3,
-          "prerequisites": [
-            "Requisite score on the EmSAT",
-            "IETLS",
-            "TOEFL",
-            "OOPT",
-            "or completion of required English foundation course(s)"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -4443,13 +4395,7 @@ const majorCourseData = {
           "code": "ENGL 101",
           "title": "Composition",
           "credits": 3,
-          "prerequisites": [
-            "Requisite score on the EmSAT",
-            "IETLS",
-            "TOEFL",
-            "OOPT",
-            "or completion of required English foundation course(s)"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -4863,9 +4809,7 @@ const majorCourseData = {
           "code": "ENGR 107",
           "title": "Introduction to Engineering",
           "credits": 2,
-          "prerequisites": [
-            "Math Placement Test score qualifying student for MATH 113"
-          ],
+          "prerequisites": [],
           "corequisites": []
         },
         {
@@ -5260,7 +5204,7 @@ const majorCourseData = {
           "title": "Engineering Statistics",
           "credits": 3,
           "prerequisites": [
-            "Math 114"
+            "MATH 114"
           ],
           "corequisites": []
         }
