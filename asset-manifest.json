@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/aurak-catalog/static/css/main.ad90684e.css",
-    "main.js": "/aurak-catalog/static/js/main.5e2a0c01.js",
+    "main.js": "/aurak-catalog/static/js/main.5c020bee.js",
     "static/js/453.d983cd7d.chunk.js": "/aurak-catalog/static/js/453.d983cd7d.chunk.js",
     "index.html": "/aurak-catalog/index.html",
     "main.ad90684e.css.map": "/aurak-catalog/static/css/main.ad90684e.css.map",
-    "main.5e2a0c01.js.map": "/aurak-catalog/static/js/main.5e2a0c01.js.map",
+    "main.5c020bee.js.map": "/aurak-catalog/static/js/main.5c020bee.js.map",
     "453.d983cd7d.chunk.js.map": "/aurak-catalog/static/js/453.d983cd7d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ad90684e.css",
-    "static/js/main.5e2a0c01.js"
+    "static/js/main.5c020bee.js"
   ]
 }
