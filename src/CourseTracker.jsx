@@ -84,6 +84,7 @@ useEffect(() => {
 		}
 	}, [catalog, majorKey]);
 
+
 	// Check prerequisites for a course
 	const checkPrerequisites = (course, semesterIndex) => {
 		if (!course.prerequisites || course.prerequisites.length === 0) {
@@ -97,14 +98,33 @@ useEffect(() => {
 			.filter(c => c.completed)
 			.map(c => c.code);
 
-		const missingPrerequisites = course.prerequisites.filter(
-			prereq => !previousCourses.includes(prereq)
-		);
+		const missingRequirements = [];
 
-		if (missingPrerequisites.length > 0) {
+		// Check each prerequisite condition
+		for (const prereq of course.prerequisites) {
+			// Check if prerequisite contains "or" (case insensitive)
+			if (typeof prereq === 'string' && prereq.toLowerCase().includes(' or ')) {
+				// Handle OR condition: split by "or" and check if ANY are satisfied
+				const options = prereq.split(/\s+or\s+/i);
+				const validOptions = options.filter(option => 
+					previousCourses.includes(option) || previousCourses.includes(option.trim())
+				);
+				
+				if (validOptions.length === 0) {
+					missingRequirements.push(`(${options.join(' or ')})`);
+				}
+			} else {
+				// Handle AND condition: individual prerequisite must be satisfied
+				if (!previousCourses.includes(prereq)) {
+					missingRequirements.push(prereq);
+				}
+			}
+		}
+
+		if (missingRequirements.length > 0) {
 			return {
 				valid: false,
-				message: `Missing prerequisites: ${missingPrerequisites.join(', ')}`
+				message: `Missing prerequisites: ${missingRequirements.join(', ')}`
 			};
 		}
 
@@ -112,8 +132,16 @@ useEffect(() => {
 	};
 
 	const getPrerequisiteText = (course) => {
+		const formatPrereq = (prereq) => {
+				if (prereq.toLowerCase().includes(' or ')) {
+					return `(${prereq})`;
+				}
+				return prereq;
+			};
+
 		if (course.prerequisites && course.prerequisites.length > 0) {
-			return `Prerequisites: ${course.prerequisites.join(', ')}`;
+			const formattedPrereqs = course.prerequisites.map(formatPrereq);
+			return `Prerequisites: ${formattedPrereqs.join(', ')}`;
 		}
 		if (course.corequisites && course.corequisites.length > 0) {
 			return `Corequisites: ${course.corequisites.join(', ')}`;

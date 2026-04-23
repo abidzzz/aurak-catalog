@@ -36,9 +36,7 @@ const majorCourseData = {
           "title": "Introduction to Engineering",
           "credits": 2,
           "corequisites": [],
-          "prerequisites": [
-            "Math Placement Test score qualifying student for MATH 113"
-          ]
+          "prerequisites": []
         },
         {
           "code": "MATH 113",
