@@ -116,7 +116,7 @@ const majorCourseData = {
           "credits": 3
         },
         {
-          "code": "GEN-ED",
+          "code": "GEN ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         }
@@ -132,7 +132,7 @@ const majorCourseData = {
           "credits": 3,
           "prerequisites": [
             "MATH 113",
-            "(CSCI 112 or CSCI 114)"
+            "CSCI 112 or CSCI 114"
           ],
           "corequisites": []
         },
@@ -439,7 +439,7 @@ const majorCourseData = {
           "title": "Internet of Things System",
           "credits": 3,
           "prerequisites": [
-            "(CSCI 232 or CENG 315)",
+            "CSCI 232 or CENG 315",
             "CSCI 462"
           ],
           "corequisites": []
@@ -635,7 +635,7 @@ const majorCourseData = {
           "prerequisites": []
         },
         {
-          "code": "GEN-ED",
+          "code": "GEN ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         }
@@ -669,7 +669,7 @@ const majorCourseData = {
           "credits": 3,
           "prerequisites": [
             "MATH 113",
-            "(CSCI 112 or CSCI 114)"
+            "CSCI 112 or CSCI 114"
           ],
           "corequisites": []
         },
@@ -1093,7 +1093,7 @@ const majorCourseData = {
           ]
         },
         {
-          "code": "GEN-ED",
+          "code": "GEN ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         }
@@ -1127,7 +1127,7 @@ const majorCourseData = {
           "credits": 3,
           "prerequisites": [
             "MATH 113",
-            "(CSCI 112 or CSCI 114)"
+            "CSCI 112 or CSCI 114"
           ],
           "corequisites": []
         },
@@ -1375,7 +1375,7 @@ const majorCourseData = {
           "title": "Internet of Things System",
           "credits": 3,
           "prerequisites": [
-            "(CSCI 232 or CENG 315)",
+            "CSCI 232 or CENG 315",
             "CSCI 462"
           ],
           "corequisites": []
@@ -1707,7 +1707,7 @@ const majorCourseData = {
           "corequisites": []
         },
         {
-          "code": "GEN-ED",
+          "code": "GEN ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         }
@@ -2889,7 +2889,7 @@ const majorCourseData = {
       "semester": "First Semester",
       "courses": [
         {
-          "code": "GEN-ED",
+          "code": "GEN ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         },
@@ -3846,7 +3846,7 @@ const majorCourseData = {
           "corequisites": []
         },
         {
-          "code": "GEN-ED",
+          "code": "GEN ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         },
@@ -4041,7 +4041,7 @@ const majorCourseData = {
           "corequisites": []
         },
         {
-          "code": "GEN-ED",
+          "code": "GEN ED",
           "title": "Humanities/Fine Arts Course",
           "credits": 3
         },
@@ -5084,7 +5084,7 @@ const majorCourseData = {
           "credits": 3,
           "prerequisites": [
             "MATH 214",
-            "(CSCI 112 or CSCI 114)"
+            "CSCI 112 or CSCI 114"
           ],
           "corequisites": []
         },
