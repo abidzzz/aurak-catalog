@@ -43,7 +43,7 @@ useEffect(() => {
 	if (savedCatalog) {
 		const parsedCatalog = JSON.parse(savedCatalog);
 		
-		// Update the saved catalog with fresh prerequisite data from original
+		// Reconstruct catalog from saved structure but with fresh data from original
 		const updatedCatalog = parsedCatalog.map((savedSemester) => {
 			// Find matching semester in original catalog by year and semester name
 			const originalSemester = originalCatalog.find(orig => 
@@ -52,22 +52,25 @@ useEffect(() => {
 			
 			if (!originalSemester) return savedSemester;
 			
+			// For each course in the saved semester, find the fresh version from original
+			const updatedCourses = savedSemester.courses.map(savedCourse => {
+				// Find fresh course data from original semester
+				const freshCourse = originalSemester.courses.find(c => c.code === savedCourse.code);
+				
+				if (freshCourse) {
+					// Use fresh course data (with updated prerequisites) but keep completion status
+					return {
+						...freshCourse,
+						completed: savedCourse.completed || false
+					};
+				}
+				// If course not found in original (maybe removed from curriculum), keep saved version
+				return savedCourse;
+			});
+			
 			return {
 				...savedSemester,
-				courses: savedSemester.courses.map(savedCourse => {
-					// Find fresh course data from original
-					const freshCourse = originalSemester.courses.find(c => c.code === savedCourse.code);
-					
-					if (freshCourse) {
-						// Merge: keep saved position and completion, but use fresh prerequisites/title/credits
-						return {
-							...freshCourse,
-							completed: savedCourse.completed || false
-						};
-					}
-					// Course might have been removed from curriculum, keep saved version as is
-					return savedCourse;
-				})
+				courses: updatedCourses
 			};
 		});
 		
@@ -77,14 +80,24 @@ useEffect(() => {
 	}
 }, [majorKey]);
 
-	// Save catalog to localStorage whenever it changes
-	useEffect(() => {
-		if (catalog.length > 0) {
-			localStorage.setItem(`catalog-${majorKey}`, JSON.stringify(catalog));
-		}
-	}, [catalog, majorKey]);
-
-
+// Save catalog to localStorage whenever it changes
+useEffect(() => {
+	if (catalog.length > 0) {
+		// ONLY save essential data - course codes, positions, and completion status
+		// Don't save prerequisites, titles, credits, etc. - they come from courses.js
+		const catalogToSave = catalog.map(semester => ({
+			year: semester.year,
+			semester: semester.semester,
+			title: semester.title,
+			courses: semester.courses.map(course => ({
+				code: course.code,
+				completed: course.completed || false
+				// That's it! No prerequisites, no titles, no credits
+			}))
+		}));
+		localStorage.setItem(`catalog-${majorKey}`, JSON.stringify(catalogToSave));
+	}
+}, [catalog, majorKey]);
 	// Check prerequisites for a course
 	const checkPrerequisites = (course, semesterIndex) => {
 		if (!course.prerequisites || course.prerequisites.length === 0) {
@@ -98,13 +111,38 @@ useEffect(() => {
 			.filter(c => c.completed)
 			.map(c => c.code);
 
+		// Get total completed credits
+		const totalCompletedCredits = catalog
+			.flatMap(sem => sem.courses)
+			.filter(c => c.completed)
+			.reduce((sum, c) => sum + c.credits, 0);
+
 		const missingRequirements = [];
 
 		// Check each prerequisite condition
 		for (const prereq of course.prerequisites) {
+			// Check for credit hour requirements
+			if (typeof prereq === 'string' && prereq.toLowerCase().includes('credit')) {
+				const creditMatch = prereq.match(/(\d+)\s*Credit/);
+				if (creditMatch) {
+					const requiredCredits = parseInt(creditMatch[1]);
+					if (totalCompletedCredits < requiredCredits) {
+						missingRequirements.push(prereq);
+					}
+				}
+				continue;
+			}
+			
+			// Check for CGPA requirements (always return true for now, or handle differently)
+			if (typeof prereq === 'string' && prereq.toLowerCase().includes('cgpa')) {
+				// You could add CGPA tracking if needed
+				// For now, assume satisfied
+				continue;
+			}
+			
 			// Check if prerequisite contains "or" (case insensitive)
 			if (typeof prereq === 'string' && prereq.toLowerCase().includes(' or ')) {
-				// Handle OR condition: split by "or" and check if ANY are satisfied
+				// Handle OR condition
 				const options = prereq.split(/\s+or\s+/i);
 				const validOptions = options.filter(option => 
 					previousCourses.includes(option) || previousCourses.includes(option.trim())
@@ -114,8 +152,10 @@ useEffect(() => {
 					missingRequirements.push(`(${options.join(' or ')})`);
 				}
 			} else {
-				// Handle AND condition: individual prerequisite must be satisfied
-				if (!previousCourses.includes(prereq)) {
+				// Handle AND condition - only check if it looks like a course code
+				// Skip text-based prerequisites that aren't course codes
+				const looksLikeCourseCode = /^[A-Z]{2,4}\s?\d{3}/.test(prereq);
+				if (looksLikeCourseCode && !previousCourses.includes(prereq)) {
 					missingRequirements.push(prereq);
 				}
 			}
@@ -124,7 +164,7 @@ useEffect(() => {
 		if (missingRequirements.length > 0) {
 			return {
 				valid: false,
-				message: `Missing prerequisites: ${missingRequirements.join(', ')}`
+				message: `Missing: ${missingRequirements.join(', ')}`
 			};
 		}
 
