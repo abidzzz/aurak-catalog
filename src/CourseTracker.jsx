@@ -43,38 +43,69 @@ useEffect(() => {
 	if (savedCatalog) {
 		const parsedCatalog = JSON.parse(savedCatalog);
 		
-		// Reconstruct catalog from saved structure but with fresh data from original
-		const updatedCatalog = parsedCatalog.map((savedSemester) => {
-			// Find matching semester in original catalog by year and semester name
-			const originalSemester = originalCatalog.find(orig => 
-				orig.year === savedSemester.year && orig.semester === savedSemester.semester
-			);
-			
-			if (!originalSemester) return savedSemester;
-			
-			// For each course in the saved semester, find the fresh version from original
-			const updatedCourses = savedSemester.courses.map(savedCourse => {
-				// Find fresh course data from original semester
-				const freshCourse = originalSemester.courses.find(c => c.code === savedCourse.code);
-				
-				if (freshCourse) {
-					// Use fresh course data (with updated prerequisites) but keep completion status
-					return {
-						...freshCourse,
-						completed: savedCourse.completed || false
-					};
-				}
-				// If course not found in original (maybe removed from curriculum), keep saved version
-				return savedCourse;
+		// Global lookup: course code -> fresh course data (title, credits,
+		// prerequisites, etc), searched across the WHOLE catalog rather than
+		// only within one semester. This is the actual fix: previously a
+		// course that got moved to a different semester in courses.js
+		// couldn't be found and fell back to a bare stub with no data.
+		const freshByCode = {};
+		originalCatalog.forEach(sem => {
+			sem.courses.forEach(c => {
+				freshByCode[c.code] = c;
 			});
-			
-			return {
-				...savedSemester,
-				courses: updatedCourses
-			};
+		});
+
+		const placedCodes = new Set();
+
+		// Rebuild using the SAVED structure/order so drag-and-drop
+		// arrangement is preserved, just refresh each course's data by code.
+		const rebuiltSemesters = parsedCatalog
+			.map(savedSemester => {
+				const originalSemester = originalCatalog.find(orig =>
+					orig.year === savedSemester.year && orig.semester === savedSemester.semester
+				);
+				if (!originalSemester) return null; // semester no longer exists
+
+				const courses = savedSemester.courses
+					.map(savedCourse => {
+						const fresh = freshByCode[savedCourse.code];
+						if (!fresh) return null; // course removed from courses.js entirely
+						placedCodes.add(savedCourse.code);
+						return { ...fresh, completed: savedCourse.completed || false };
+					})
+					.filter(Boolean);
+
+				return { ...originalSemester, courses };
+			})
+			.filter(Boolean);
+
+		// Any course that's brand-new in courses.js (wasn't in saved data
+		// at all) gets appended to its default semester so it still shows up.
+		originalCatalog.forEach(originalSemester => {
+			const targetSemester = rebuiltSemesters.find(sem =>
+				sem.year === originalSemester.year && sem.semester === originalSemester.semester
+			);
+			originalSemester.courses.forEach(course => {
+				if (!placedCodes.has(course.code)) {
+					placedCodes.add(course.code);
+					if (targetSemester) {
+						targetSemester.courses.push({ ...course, completed: false });
+					}
+				}
+			});
+		});
+
+		// Any brand-new semester that doesn't exist in saved data at all
+		originalCatalog.forEach(originalSemester => {
+			const exists = rebuiltSemesters.find(sem =>
+				sem.year === originalSemester.year && sem.semester === originalSemester.semester
+			);
+			if (!exists) {
+				rebuiltSemesters.push(originalSemester);
+			}
 		});
 		
-		setCatalog(updatedCatalog);
+		setCatalog(rebuiltSemesters);
 	} else {
 		setCatalog(originalCatalog);
 	}
